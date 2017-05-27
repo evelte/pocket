@@ -4,16 +4,20 @@ import matplotlib.dates as mdates
 import datetime
 import numpy as np
 import pandas as pd
+import pocket_reading
 from pocket_reading.import_data import get_new_dataset
+import os
+
 
 # name of dataset is defined using today's date
 today = datetime.datetime.now().date()
 name = str(today)
 
 # get updated data from pocket, and save it on shelve with today's name
-get_new_dataset(name)
+# get_new_dataset(name)
 
-with shelve.open('mshelve') as db:
+file = os.path.join(pocket_reading.root, 'data', 'mshelve')
+with shelve.open(file) as db:
 
     shelve_keys = list(db.keys())
     shelve_keys.sort()
