@@ -4,8 +4,11 @@ from pprint import pprint
 import pandas as pd
 import datetime
 import pocket_reading
+from pocket_reading import secrets
+import os
 
-pocket_instance = pocket.Pocket(pocket_reading.secrets.POCKET_CONSUMER_KEY, pocket_reading.secrets.ACCESS_TOKEN)
+
+pocket_instance = pocket.Pocket(secrets.POCKET_CONSUMER_KEY, secrets.ACCESS_TOKEN)
 
 def convert_date(timestmp):
     d = datetime.datetime.fromtimestamp(int(timestmp)).strftime('%Y-%m-%d')
@@ -34,6 +37,6 @@ def get_new_dataset(name):
     df_all = pd.DataFrame(imported)[['resolved_title', 'resolved_id', 'status', 'word_count',
                                      'time_added']]
 
-    filename = 'mshelve'
+    filename = os.path.join(pocket_reading.root, 'data', 'mshelve')
     with shelve.open(filename) as db:
         db[name] = df_all
