@@ -14,7 +14,7 @@ today = datetime.datetime.now().date()
 name = str(today)
 
 # get updated data from pocket, and save it on shelve with today's name
-# get_new_dataset(name)
+get_new_dataset(name)
 
 file = os.path.join(pocket_reading.root, 'data', 'mshelve')
 with shelve.open(file) as db:
@@ -96,7 +96,6 @@ for df_ind, df_all in enumerate(dfs):
     # plt.setp(ax.xaxis.get_majorticklabels(), rotation=70)
     # plt.show()
 
-
 average_articles_read = []
 average_words_read = []
 timeline = []
@@ -106,7 +105,7 @@ for dataset_index in range(0, len(collect_date_list)-1):
     read_words = read_words_list[dataset_index + 1] - read_words_list[dataset_index]
 
     average_articles_read.append(round(read_articles / time_delta, 1))
-    average_words_read.append(int(read_words / time_delta))
+    average_words_read.append(int(read_words / time_delta / 1000)) # in thousands
     timeline.append(str(collect_date_list[dataset_index+1].date()))
 
     print('Analyzing set {}/{}'.format(dataset_index+1, len(collect_date_list)-1))
@@ -128,13 +127,15 @@ average_read = pd.DataFrame({'read_articles': average_articles_read,
 
 sns.set_style("white")
 fig, ax = plt.subplots()
-ax = sns.barplot(x="time", y="read_articles", data=average_read)
 ax2 = ax.twinx()
-sns.barplot(x="time", y="read_words", data=average_read)
-# sns.despine(ax=ax, right=True, left=True)
-# sns.despine(ax=ax2, left=True, right=False)
-#ax2.spines['right'].set_color('white')
 
-#
+width = 0.4
+
+average_read.read_articles.plot(kind='bar', color='#9b59b6', ax=ax, width=width, position=1)
+average_read.read_words.plot(kind='bar', color='#95a5a6', ax=ax2, width=width, position=0)
+
+ax.set_xticklabels(average_read.time, rotation=30)
+ax.set_ylabel('Number of articles')
+ax2.set_ylabel('Number of words (in thousands)')
 
 sns.plt.show()
