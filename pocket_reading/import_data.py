@@ -22,7 +22,16 @@ def get_new_dataset(name):
     fields = list(res.keys())
     print(fields)
 
+    input()
+
+    pprint(res['since'])
+    input()
+
+    pprint(['search_meta'])
+    input()
+
     pprint(res['list'])
+    input()
 
     articles = res['list']
     n_articles = len(articles)
@@ -40,3 +49,8 @@ def get_new_dataset(name):
     filename = os.path.join(pocket_reading.root, 'data', 'mshelve')
     with shelve.open(filename) as db:
         db[name] = df_all
+
+
+if __name__ == '__main__':
+
+    get_new_dataset('test')

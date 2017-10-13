@@ -1,0 +1,5 @@
+pocket_reading.egg-info/PKG-INFO
+pocket_reading.egg-info/SOURCES.txt
+pocket_reading.egg-info/dependency_links.txt
+pocket_reading.egg-info/not-zip-safe
+pocket_reading.egg-info/top_level.txt

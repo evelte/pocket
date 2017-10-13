@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='pocket_reading',
-      version=version,
+      version='v1',
       url='http://pocket_reading.org',
       description='',
       author='',
