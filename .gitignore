@@ -3,4 +3,5 @@ secrets.py
 data/mshelve
 data/mshelve_old
 /logs
+.idea
 
