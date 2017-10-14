@@ -22,7 +22,7 @@ class DB:
 
         try:
             self.cursor.execute(query)
-            result = self.cursor.fetchall()[0][0]
+            result = self.cursor.fetchall()
         except Exception as err:
             print(err)
         else:
@@ -44,7 +44,6 @@ class DB:
     def disconnect(self):
         if self.cursor:
             self.cursor.close()
-
 
 
 if __name__ == '__main__':
